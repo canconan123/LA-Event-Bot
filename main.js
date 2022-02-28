@@ -79,7 +79,7 @@ client.on("messageCreate", (message) => {
     guildss.channels.cache.get(channelid).send("Alram Start");
 
     clearInterval(intervaliid);
-    intervaliid = setInterval(fn10minutes, 6000);
+    intervaliid = setInterval(fn10minutes, 600000);
   }
 
   //getroles
