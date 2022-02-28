@@ -18,11 +18,6 @@ const prefix = "~";
 let channelid = "947415388235399179";
 let guildid = "811432705446510612";
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Our app is running on port ${PORT}`);
-});
-
 client.once("ready", () => {
   console.log("Bot online");
 });
