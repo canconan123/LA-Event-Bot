@@ -89,7 +89,10 @@ client.on("messageCreate", (message) => {
       guildss.channels.cache.get(channelid).send("Role Alreasdy Exist");
       return;
     } else {
-      message.member.roles.add(idobject[chaosf.getEventName()]);
+      let role = message.guild.roles.cache.find(
+        (role) => role.name == chaosf.getEventName()
+      );
+      message.member.roles.add(role);
     }
   }
 });
