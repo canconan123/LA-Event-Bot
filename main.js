@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const { Client, Intents } = require("discord.js");
 
 const myIntents = new Intents();
@@ -107,4 +109,4 @@ const createroles = (message) => {
   }
 };
 
-client.login("OTQ3MzU0NDIzNjc4NjA3NDEw.YhsCjw.JNkAG2rK4YO-9vcyhs_AFD-RWZM");
+client.login(process.env.BOT_TOKEN);
