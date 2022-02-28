@@ -7,6 +7,7 @@ myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 
 //import functions
 let chaosf = require("./chaos");
+let intervaliid;
 
 //idobejct;
 var idobject = {};
@@ -51,7 +52,7 @@ function fn10minutes() {
         "<@&" +
           chaosid +
           ">" +
-          "there will be a chaos gate in " +
+          " there will be a chaos gate in " +
           timechaos +
           " minutes."
       );
@@ -76,7 +77,9 @@ client.on("messageCreate", (message) => {
     );
 
     guildss.channels.cache.get(channelid).send("Alram Start");
-    setInterval(fn10minutes, 600000);
+
+    clearInterval(intervaliid);
+    intervaliid = setInterval(fn10minutes, 6000);
   }
 
   //getroles
