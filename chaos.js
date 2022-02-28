@@ -118,17 +118,17 @@ const chaosf = (time, day) => {
   var remaintime;
   data.chaos.forEach((ctime) => {
     if (day == ctime.day) {
-      ctime.time.forEach((etime) => {
+      for (let etime of ctime.time) {
         let timec = time.split(":");
         let etimec = etime.split(":");
 
         if (timec[0] == etimec[0] - 1 && 60 - 20 <= timec[1]) {
-          console.log(time[1]);
           remaintime = 60 - timec[1];
-        } else {
+          break;
+        } else if (timec[0] != etimec[0] - 1) {
           remaintime = null;
         }
-      });
+      }
     }
   });
 
