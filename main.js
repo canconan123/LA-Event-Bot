@@ -7,6 +7,8 @@ myIntents.add(Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES);
 
 //import functions
 let chaosf = require("./chaos");
+let fieldBossf = require("./fieldBoss");
+let ghostShipf = require("./ghostShip");
 let intervaliid;
 
 //idobejct;
@@ -57,7 +59,7 @@ function fn10minutes() {
           " minutes."
       );
   }
-  
+
   //Field Boss timer
   var timefieldBoss = fieldBossf.fieldBossf(psttime, pstday);
 
@@ -69,14 +71,14 @@ function fn10minutes() {
       .get(channelid)
       .send(
         "<@&" +
-          fieldBoss +
+          fieldBossid +
           ">" +
           " there will be a field boss in " +
           timefieldBoss +
           " minutes."
       );
   }
-  
+
   //Ghost Ship timer
   var timeghostShip = ghostShipf.ghostShipf(psttime, pstday);
 
@@ -121,7 +123,7 @@ client.on("messageCreate", (message) => {
   }
 
   //getroles
-   //chaos
+  //chaos
   else if (command === "chaosgate") {
     if (
       message.member.roles.cache.some(
@@ -137,7 +139,7 @@ client.on("messageCreate", (message) => {
       message.member.roles.add(role);
     }
   }
-  
+
   //Field Boss
   else if (command === "fieldboss") {
     if (
@@ -154,7 +156,7 @@ client.on("messageCreate", (message) => {
       message.member.roles.add(role);
     }
   }
-  
+
   //Ghost Ship
   else if (command === "ghostship") {
     if (
@@ -175,9 +177,10 @@ client.on("messageCreate", (message) => {
 
 const createroles = (message) => {
   //chaos role
-  if (message.guild.roles.cache.find((role) => role.name == "Chaos Gate")) {
+  if (
+    message.guild.roles.cache.find((role) => role.name == chaosf.getEventName())
+  ) {
     console.log("role exist");
-    return false;
   } else {
     message.guild.roles
       .create({
@@ -186,11 +189,14 @@ const createroles = (message) => {
       })
       .catch(console.error);
   }
-  
+
   //Field Boss role
-  if (message.guild.roles.cache.find((role) => role.name == "Field Boss")) {
+  if (
+    message.guild.roles.cache.find(
+      (role) => role.name == fieldBossf.getEventName()
+    )
+  ) {
     console.log("role exist");
-    return false;
   } else {
     message.guild.roles
       .create({
@@ -199,11 +205,14 @@ const createroles = (message) => {
       })
       .catch(console.error);
   }
-  
+
   //Ghost Ship role
-  if (message.guild.roles.cache.find((role) => role.name == "Ghost Ship")) {
+  if (
+    message.guild.roles.cache.find(
+      (role) => role.name == ghostShipf.getEventName()
+    )
+  ) {
     console.log("role exist");
-    return false;
   } else {
     message.guild.roles
       .create({
@@ -212,6 +221,7 @@ const createroles = (message) => {
       })
       .catch(console.error);
   }
+  return false;
 };
 
 client.login(process.env.BOT_TOKEN);
