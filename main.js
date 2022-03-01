@@ -57,6 +57,44 @@ function fn10minutes() {
           " minutes."
       );
   }
+  
+  //Field Boss timer
+  var timefieldBoss = fieldBossf.fieldBossf(psttime, pstday);
+
+  let fieldBossid = idobject[fieldBossf.getEventName()];
+
+  console.log(timefieldBoss);
+  if (timefieldBoss != null) {
+    guild.channels.cache
+      .get(channelid)
+      .send(
+        "<@&" +
+          fieldBoss +
+          ">" +
+          " there will be a field boss in " +
+          timefieldBoss +
+          " minutes."
+      );
+  }
+  
+  //Ghost Ship timer
+  var timeghostShip = ghostShipf.ghostShipf(psttime, pstday);
+
+  let ghostShipid = idobject[ghostShipf.getEventName()];
+
+  console.log(timeghostShip);
+  if (timeghostShip != null) {
+    guild.channels.cache
+      .get(channelid)
+      .send(
+        "<@&" +
+          ghostShipid +
+          ">" +
+          " there will be a ghost ship in " +
+          timeghostShip +
+          " minutes."
+      );
+  }
 }
 
 client.on("messageCreate", (message) => {
@@ -83,6 +121,7 @@ client.on("messageCreate", (message) => {
   }
 
   //getroles
+   //chaos
   else if (command === "chaosgate") {
     if (
       message.member.roles.cache.some(
@@ -94,6 +133,40 @@ client.on("messageCreate", (message) => {
     } else {
       let role = message.guild.roles.cache.find(
         (role) => role.name == chaosf.getEventName()
+      );
+      message.member.roles.add(role);
+    }
+  }
+  
+  //Field Boss
+  else if (command === "fieldboss") {
+    if (
+      message.member.roles.cache.some(
+        (role) => role.name == fieldBossf.getEventName()
+      )
+    ) {
+      guildss.channels.cache.get(channelid).send("Role Alreasdy Exist");
+      return;
+    } else {
+      let role = message.guild.roles.cache.find(
+        (role) => role.name == fieldBossf.getEventName()
+      );
+      message.member.roles.add(role);
+    }
+  }
+  
+  //Ghost Ship
+  else if (command === "ghostship") {
+    if (
+      message.member.roles.cache.some(
+        (role) => role.name == ghostShipf.getEventName()
+      )
+    ) {
+      guildss.channels.cache.get(channelid).send("Role Alreasdy Exist");
+      return;
+    } else {
+      let role = message.guild.roles.cache.find(
+        (role) => role.name == ghostShipf.getEventName()
       );
       message.member.roles.add(role);
     }
@@ -110,6 +183,32 @@ const createroles = (message) => {
       .create({
         name: chaosf.getEventName(),
         color: "#c90076",
+      })
+      .catch(console.error);
+  }
+  
+  //Field Boss role
+  if (message.guild.roles.cache.find((role) => role.name == "Field Boss")) {
+    console.log("role exist");
+    return false;
+  } else {
+    message.guild.roles
+      .create({
+        name: fieldBossf.getEventName(),
+        color: "#c90077",
+      })
+      .catch(console.error);
+  }
+  
+  //Ghost Ship role
+  if (message.guild.roles.cache.find((role) => role.name == "Ghost Ship")) {
+    console.log("role exist");
+    return false;
+  } else {
+    message.guild.roles
+      .create({
+        name: ghostShipf.getEventName(),
+        color: "#c90078",
       })
       .catch(console.error);
   }
