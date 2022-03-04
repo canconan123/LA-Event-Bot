@@ -3,21 +3,15 @@ const data = {
     {
       name: "Field Boss Spawn",
       day: "Monday",
-      time: [
-        "1:00",
-        "2:00",
-        "3:00",
-        "4:00",
-        "5:00",
-      ],
+      time: ["1:00", "2:00", "3:00", "4:00", "5:00"],
       location: "Depends on gear score",
       message: "Field Boss Spawn",
     },
     {
       name: "Field Boss Spawn",
       day: "Tuesday",
-      time: [ 
-	    "11:00",
+      time: [
+        "11:00",
         "12:00",
         "13:00",
         "14:00",
@@ -103,7 +97,7 @@ const fieldBossf = (time, day) => {
         let timec = time.split(":");
         let etimec = etime.split(":");
 
-        if (timec[0] == etimec[0] - 1 && 60 - 20 <= timec[1]) {
+        if (timec[0] == etimec[0] - 1 && 60 - 20 == timec[1]) {
           remaintime = 60 - timec[1];
           break;
         } else if (timec[0] != etimec[0] - 1) {

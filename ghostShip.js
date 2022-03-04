@@ -3,8 +3,8 @@ const data = {
     {
       name: "Ghost Ship Spawn",
       day: "Tuesday",
-      time: [ 
-	    "11:00",
+      time: [
+        "11:00",
         "12:00",
         "13:00",
         "14:00",
@@ -97,7 +97,7 @@ const ghostShipf = (time, day) => {
         let timec = time.split(":");
         let etimec = etime.split(":");
 
-        if (timec[0] == etimec[0] - 1 && 60 - 20 <= timec[1]) {
+        if (timec[0] == etimec[0] - 1 && 60 - 20 == timec[1]) {
           remaintime = 60 - timec[1];
           break;
         } else if (timec[0] != etimec[0] - 1) {
