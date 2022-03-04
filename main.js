@@ -19,9 +19,8 @@ const client = new Client({
 });
 
 const prefix = "~";
-let channelid = "811432705446510612";
-let guildid = "947415388235399179";
-let channelid2 = "947415388235399179";
+let channelid = "947415388235399179";
+let guildid = "811432705446510612";
 
 client.once("ready", () => {
   console.log("Bot online");
@@ -79,7 +78,7 @@ function fn10minutes() {
   console.log(timefieldBoss);
   if (timefieldBoss != null) {
     guild.channels.cache
-      .get(channelid2)
+      .get(channelid)
       .send(
         "<@&" +
           fieldBossid +
@@ -98,7 +97,7 @@ function fn10minutes() {
   console.log(timeghostShip);
   if (timeghostShip != null) {
     guild.channels.cache
-      .get(channelid2)
+      .get(channelid)
       .send(
         "<@&" +
           ghostShipid +
@@ -122,7 +121,7 @@ function fn10minutes() {
         string += mers.merchantname[j] + "\n";
       }
       guild.channels.cache
-        .get(channelid2)
+        .get(channelid)
         .send(
           "<@&" +
             merchantid +
