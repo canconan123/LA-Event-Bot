@@ -22,8 +22,8 @@ const client = new Client({
 
 const prefix = "~";
 
-let channelid = "947415388235399179";
-let guildid = "811432705446510612";
+let channelid = "949292981465272320";
+let guildid = "788340911343140864";
 
 client.once("ready", () => {
   const guild = client.guilds.cache.get(guildid);
