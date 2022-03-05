@@ -181,24 +181,9 @@ client.on("messageCreate", (message) => {
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (
-    command === "generateroleid" &&
-    message.author.id == message.guild.ownerId
-  ) {
-    Object.keys(idobject).forEach((k) => delete idobject[k]);
-    message.guild.roles.cache.forEach(
-      (role) => (idobject[role.name] = role.id)
-    );
-
-    guildss.channels.cache.get(channelid).send("Alarm Start");
-
-    clearInterval(intervaliid);
-    intervaliid = setInterval(fn10minutes, 600000);
-  }
-
   //getroles
   //chaos
-  else if (command === "chaosgate") {
+  if (command === "chaosgate") {
     if (
       message.member.roles.cache.some(
         (role) => role.name == chaosf.getEventName()
