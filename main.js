@@ -11,20 +11,54 @@ let fieldBossf = require("./fieldBoss");
 let ghostShipf = require("./ghostShip");
 let merchantf = require("./merchant");
 let intervaliid;
+let intervalistartid;
 
 //idobejct;
 var idobject = {};
+
 const client = new Client({
   intents: myIntents,
 });
 
 const prefix = "~";
+
 let channelid = "947415388235399179";
 let guildid = "811432705446510612";
 
 client.once("ready", () => {
-  console.log("Bot online");
+  const guild = client.guilds.cache.get(guildid);
+  let roleName = "Chaos Gate";
+  let role = guild.roles.cache.find((x) => x.name === roleName);
+  if (role === undefined) {
+    createroles(guild);
+  }
+  console.log("Bot Online");
+  intervalistartid = setInterval(restart, 60000);
 });
+
+function restart() {
+  var currentDate1 = new Date();
+  var psttime1 = currentDate1.toLocaleString("en-US", {
+    hourCycle: "h24",
+    timeZone: "America/Los_Angeles",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  let timec = psttime1.split(":");
+
+  if (timec[1] % 10 == 0) {
+    clearInterval(intervalistartid);
+    const guild = client.guilds.cache.get(guildid);
+    Object.keys(idobject).forEach((k) => delete idobject[k]);
+    guild.roles.cache.forEach((role) => (idobject[role.name] = role.id));
+
+    guild.channels.cache.get(channelid).send("Alarm Start");
+
+    clearInterval(intervaliid);
+    intervaliid = setInterval(fn10minutes, 600000);
+  }
+}
 
 function fn10minutes() {
   const guild = client.guilds.cache.get(guildid);
@@ -146,9 +180,8 @@ client.on("messageCreate", (message) => {
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
-  if (command === "createroles" && message.author.id == message.guild.ownerId) {
-    createroles(message);
-  } else if (
+
+  if (
     command === "generateroleid" &&
     message.author.id == message.guild.ownerId
   ) {
@@ -380,14 +413,12 @@ client.on("messageCreate", (message) => {
 });
 
 //creating roles for server
-const createroles = (message) => {
+const createroles = (guild) => {
   //chaos role
-  if (
-    message.guild.roles.cache.find((role) => role.name == chaosf.getEventName())
-  ) {
+  if (guild.roles.cache.find((role) => role.name == chaosf.getEventName())) {
     console.log("role exist");
   } else {
-    message.guild.roles
+    guild.roles
       .create({
         name: chaosf.getEventName(),
         color: "#c90076",
@@ -397,13 +428,11 @@ const createroles = (message) => {
 
   //Field Boss role
   if (
-    message.guild.roles.cache.find(
-      (role) => role.name == fieldBossf.getEventName()
-    )
+    guild.roles.cache.find((role) => role.name == fieldBossf.getEventName())
   ) {
     console.log("role exist");
   } else {
-    message.guild.roles
+    guild.roles
       .create({
         name: fieldBossf.getEventName(),
         color: "#00FF00",
@@ -413,13 +442,11 @@ const createroles = (message) => {
 
   //Ghost Ship role
   if (
-    message.guild.roles.cache.find(
-      (role) => role.name == ghostShipf.getEventName()
-    )
+    guild.roles.cache.find((role) => role.name == ghostShipf.getEventName())
   ) {
     console.log("Role exist");
   } else {
-    message.guild.roles
+    guild.roles
       .create({
         name: ghostShipf.getEventName(),
         color: "#808080",
@@ -429,10 +456,10 @@ const createroles = (message) => {
 
   var merchants = merchantf.getEventName();
   for (var i = 0; i < merchants.length; i++) {
-    if (message.guild.roles.cache.find((role) => role.name == merchants[i])) {
+    if (guild.roles.cache.find((role) => role.name == merchants[i])) {
       console.log("Role exist");
     } else {
-      message.guild.roles
+      guild.roles
         .create({
           name: merchants[i],
           color: "#FFFF00",
