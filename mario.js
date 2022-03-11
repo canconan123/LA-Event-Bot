@@ -14,9 +14,9 @@ const mariof = (time) => {
   for (let etime of mdata.time) {
     let timec = time.split(":");
     let etimec = etime.split(":");
-    console.log(timec);
+   
     if (timec[0] == etimec[0] - 1 && 60 - 20 == timec[1]) {
-      console.log(true);
+     
       remaintime = 60 - timec[1];
 
     }
