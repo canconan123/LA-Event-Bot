@@ -10,6 +10,7 @@ let chaosf = require("./chaos");
 let fieldBossf = require("./fieldBoss");
 let ghostShipf = require("./ghostShip");
 let merchantf = require("./merchant");
+let mariof = require("./mario");
 let intervaliid;
 let intervalistartid;
 
@@ -170,6 +171,24 @@ function fn10minutes() {
         );
     });
   }
+
+  //mario timer
+  var timemario = mariof.mariof(psttime12);
+
+  let marioid = idobject[mariof.getEventName()];
+
+  if (timemario != null) {
+    guild.channels.cache
+      .get(channelid)
+      .send(
+        "<@&" +
+          marioid +
+          ">" +
+          " there will be a ghost ship in " +
+          timemario +
+          " minutes."
+      );
+  }
 }
 
 client.on("messageCreate", (message) => {
@@ -288,6 +307,26 @@ client.on("messageCreate", (message) => {
     }
   }
 
+  //mariorole
+  else if (command === "mario") {
+    if (
+      message.member.roles.cache.some(
+        (role) => role.name == mariof.getEventName()
+      )
+    ) {
+      guildss.channels.cache.get(channelid).send("Role already exist");
+      return;
+    } else {
+      let role = message.guild.roles.cache.find(
+        (role) => role.name == mariof.getEventName()
+      );
+      message.member.roles.add(role);
+      guildss.channels.cache
+        .get(channelid)
+        .send("**" + mariof.getEventName() + "**" + " added.");
+    }
+  }
+
   //removing roles
 
   //chaos
@@ -395,6 +434,26 @@ client.on("messageCreate", (message) => {
         .send("**" + merchants[2] + "**" + " removed.");
     }
   }
+
+  //mario
+  else if (command === "rmmario") {
+    if (
+      !message.member.roles.cache.some(
+        (role) => role.name == mariof.getEventName()
+      )
+    ) {
+      guildss.channels.cache.get(channelid).send("You don't have this role.");
+      return;
+    } else {
+      let role = message.guild.roles.cache.find(
+        (role) => role.name == mariof.getEventName()
+      );
+      message.member.roles.remove(role);
+      guildss.channels.cache
+        .get(channelid)
+        .send("**" + mariof.getEventName() + "**" + " removed.");
+    }
+  }
 });
 
 //creating roles for server
@@ -452,6 +511,18 @@ const createroles = (guild) => {
         .catch(console.error);
     }
   }
+
+  if (guild.roles.cache.find((role) => role.name == mariof.getEventName())) {
+    console.log("Role exist");
+  } else {
+    guild.roles
+      .create({
+        name: mariof.getEventName(),
+        color: "#FFA500",
+      })
+      .catch(console.error);
+  }
+
   return false;
 };
 
