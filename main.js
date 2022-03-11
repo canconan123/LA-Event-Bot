@@ -184,7 +184,7 @@ function fn10minutes() {
         "<@&" +
           marioid +
           ">" +
-          " there will be a ghost ship in " +
+          " there will be mario event in " +
           timemario +
           " minutes."
       );
