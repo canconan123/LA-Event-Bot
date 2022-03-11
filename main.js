@@ -28,7 +28,7 @@ let guildid = "788340911343140864";
 
 client.once("ready", () => {
   const guild = client.guilds.cache.get(guildid);
-  let roleName = "Chaos Gate";
+  let roleName = "Mario Kart";
   let role = guild.roles.cache.find((x) => x.name === roleName);
   if (role === undefined) {
     createroles(guild);
